@@ -1,0 +1,12 @@
+jupyter 
+jupyterlab 
+numpy 
+scipy 
+pandas 
+matplotlib 
+seaborn 
+plotly 
+jupyter-dash 
+scikit-learn 
+ipywidgets 
+tqdm 
