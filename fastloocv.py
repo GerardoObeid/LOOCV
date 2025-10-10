@@ -1,7 +1,6 @@
 import time
 import numpy as np
 from sklearn.neighbors import KNeighborsRegressor
-import random
 
 class FastLOOCV:
     """
@@ -67,11 +66,14 @@ class FastLOOCV:
             model.fit(X, Y)
 
             # Model evaluation for each K without retraining the model n times, n being the number of samples
-            for i in range(len(X)):
-                actual_val = Y[i]
-                actual_x = X[i]
-                y_pred = model.predict(actual_x.reshape(1, -1))
-                score[index] += (   (( (k+1) / k) ** 2) * ((actual_val-y_pred)**2))/len(X)
+            # for i in range(len(X)):
+            #     actual_val = Y[i]
+            #     actual_x = X[i]
+            #     y_pred = model.predict(actual_x.reshape(1, -1))
+            #     score[index] += ((( (k+1) / k) ** 2) * ((actual_val-y_pred)**2))/len(X)
+            predictions = model.predict(X)
+            score[index] = ((( (k+1) / k) ** 2) * np.sum((predictions -Y)**2))/len(X)
+
 
         elapsed_time = time.time() - start_time
         return score, elapsed_time
