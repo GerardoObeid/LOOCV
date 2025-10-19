@@ -44,7 +44,6 @@ class FastLOOCV:
 
         This Cross Validation (Fast-LOOCV) approach invloves much less computational cost:
             - training_time = number_of_k
-            - evaluation_time = 
             - computation_time = trainig_time + evaluation_time
         """
         start_time = time.time()
@@ -64,13 +63,7 @@ class FastLOOCV:
             # Model training once for every k, by using k + 1 NN 
             model = KNeighborsRegressor(n_neighbors = k+1, algorithm = 'kd_tree')
             model.fit(X, Y)
-
-            # Model evaluation for each K without retraining the model n times, n being the number of samples
-            # for i in range(len(X)):
-            #     actual_val = Y[i]
-            #     actual_x = X[i]
-            #     y_pred = model.predict(actual_x.reshape(1, -1))
-            #     score[index] += ((( (k+1) / k) ** 2) * ((actual_val-y_pred)**2))/len(X)
+            
             predictions = model.predict(X)
             score[index] = ((( (k+1) / k) ** 2) * np.sum((predictions -Y)**2))/len(X)
 
@@ -99,7 +92,6 @@ class FastLOOCV:
         
         This Cross Validation (LOOCV) approach invloves high computational cost:
             - training_time = number_of_k * number of samples (n)
-            - evaluation_time = 
             - computation_time = trainig_time + evaluation_time
         """
         start_time = time.time()

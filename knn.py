@@ -32,13 +32,14 @@ class Knn():
 
     def predict(self,  X_test):
         """
+            Compute the average of k neighbors
         """
         predictions = list()
         for x in X_test:
             neighbors = self.NN(x)
             indices = [nn[0] for nn in neighbors]
-            predictions.append(sum(self.Y[indices])/self.num_neighbors)
-
+            avg = sum(self.Y[indices])/self.num_neighbors
+            predictions.append(avg)
 
         return predictions
 
